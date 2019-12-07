@@ -1,5 +1,7 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, UseInterceptors } from '@nestjs/common';
 import { Article } from '../models/article.model';
+import { ValidatorInterceptor } from 'src/interceptors/validator.interceptor';
+import { CreateArticleContract } from '../contracts/createArticle.contract';
 
 @Controller('api/articles')
 export class ArticleController {
@@ -14,6 +16,7 @@ export class ArticleController {
   }
 
   @Post()
+  @UseInterceptors(new ValidatorInterceptor(new CreateArticleContract()))
   post(@Body() article: Article) {
     return article;
   }
