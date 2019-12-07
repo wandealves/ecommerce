@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { Article } from '../models/article.model';
 
 @Controller('api/articles')
 export class ArticleController {
@@ -7,18 +8,26 @@ export class ArticleController {
     return 'obter';
   }
 
+  @Get(':document')
+  getById(@Param('document') document: string) {
+    return 'obter ' + document;
+  }
+
   @Post()
-  post() {
-    return 'Criar';
+  post(@Body() article: Article) {
+    return article;
   }
 
-  @Put()
-  put() {
-    return 'Atualizar';
+  @Put(':document')
+  put(@Param('document') document: string, @Body() body) {
+    return {
+      cutsomer: document,
+      data: body,
+    };
   }
 
-  @Delete()
-  delete() {
+  @Delete(':document')
+  delete(@Param('document') document: string) {
     return 'Remover';
   }
 }
