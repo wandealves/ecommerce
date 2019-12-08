@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { CartDto } from '../dtos/cart-dto';
+import { CartDto } from '../dtos/cart.dto';
 import { IContract } from './contract';
 import { Flunt } from '../../utils/flunt';
 
@@ -11,7 +11,7 @@ export class CartContract implements IContract {
   validate(model: CartDto): boolean {
     const flunt = new Flunt();
 
-    flunt.isRequired(model.itens, 'Itens is required');
+    flunt.isRequired(model.items, 'Itens is required');
 
     this.errors = flunt.errors;
     return flunt.isValid();

@@ -8,7 +8,7 @@ export const CartSchema = new mongoose.Schema({
       unique: true,
     },
   },
-  itens: [
+  items: [
     {
       article: {
         type: mongoose.Schema.Types.ObjectId,

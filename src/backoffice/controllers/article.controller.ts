@@ -13,13 +13,8 @@ export class ArticleController {
   }
 
   @Get()
-  get() {
-    return 'obter';
-  }
-
-  @Get(':document')
-  getById(@Param('document') document: string) {
-    return 'obter ' + document;
+  async get() {
+    return await this.articleService.findAllAsync();
   }
 
   @Post()
@@ -37,18 +32,5 @@ export class ArticleController {
         new Result('Failed registration', false, null, error),
         HttpStatus.BAD_REQUEST);
     }
-  }
-
-  @Put(':document')
-  put(@Param('document') document: string, @Body() body) {
-    return {
-      cutsomer: document,
-      data: body,
-    };
-  }
-
-  @Delete(':document')
-  delete(@Param('document') document: string) {
-    return 'Remover';
   }
 }
