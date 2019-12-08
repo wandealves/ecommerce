@@ -1,10 +1,11 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, UseInterceptors } from '@nestjs/common';
-import { Article } from '../models/article.model';
-import { ValidatorInterceptor } from 'src/interceptors/validator.interceptor';
-import { CreateArticleContract } from '../contracts/createArticle.contract';
 
-@Controller('api/articles')
-export class ArticleController {
+import { ValidatorInterceptor } from 'src/interceptors/validator.interceptor';
+import { CreateCart } from '../dtos/create-cart';
+import { CartArticleContract } from '../contracts/createCart.contract';
+
+@Controller('api/carts')
+export class CartController {
   @Get()
   get() {
     return 'obter';
@@ -16,9 +17,9 @@ export class ArticleController {
   }
 
   @Post()
-  @UseInterceptors(new ValidatorInterceptor(new CreateArticleContract()))
-  post(@Body() article: Article) {
-    return article;
+  @UseInterceptors(new ValidatorInterceptor(new CartArticleContract()))
+  post(@Body() dto: CreateCart) {
+    return dto;
   }
 
   @Put(':document')

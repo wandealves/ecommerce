@@ -1,8 +1,23 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 
-import { ArticleController } from './controllers/article.controller';
+import { CartController } from './controllers/cart.controller';
+import { CartSchema } from './schemas/cart.schema';
+import { ArticleSchema } from './schemas/article.sechema';
 
 @Module({
-  controllers: [ArticleController],
+  imports: [
+    MongooseModule.forFeature([
+      {
+        name: 'Cart',
+        schema: CartSchema,
+      },
+      {
+        name: 'Article',
+        schema: ArticleSchema,
+      },
+    ]),
+  ],
+  controllers: [CartController],
 })
 export class BackofficeModule { }
