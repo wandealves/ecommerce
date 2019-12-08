@@ -2,6 +2,6 @@ import { Item } from './item.model';
 
 export class Cart {
   constructor(
-    public id: number,
+    public key: number,
     public itens: Item[]) { }
 }
