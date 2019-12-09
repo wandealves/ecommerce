@@ -2,7 +2,7 @@ import { Article } from './article.model';
 
 export class Item {
   constructor(
-    public article: Article,
+    public article_id: number,
     public quantity: number) {
   }
 }

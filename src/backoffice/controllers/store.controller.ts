@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
 
 import { Result } from '../models/result.model';
-import { CartService } from '../services/cart.service';
 import { StoreDto } from '../dtos/store.dto';
 import { StoreService } from '../services/store.service';
 
@@ -17,9 +16,9 @@ export class StoreController {
   }
 
   @Post()
-  async post(@Body() model: StoreDto) {
+  post(@Body() model: StoreDto) {
     try {
-      const result = await this.storeService.createAsync(model);
+      const result = this.storeService.create(model);
       return result;
     } catch (error) {
       throw new HttpException(

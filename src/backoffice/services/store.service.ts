@@ -1,42 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
-import { InjectModel } from '@nestjs/mongoose';
 
-import { Cart } from '../models/cart.model';
-import { ItemDto } from '../dtos/item.dto';
-import { ArticleService } from './article.service';
 import { StoreDto } from '../dtos/store.dto';
-import { Article } from '../models/article.model';
-import { CartService } from './cart.service';
-import { Discount } from '../models/discount';
-import { map } from 'rxjs/operators';
+import { Store } from '../models/store';
+import { Delivery } from '../models/delivery';
+import { Volume } from '../models/volume';
 
 @Injectable()
 export class StoreService {
 
-  constructor(
-    @InjectModel('Cart') private readonly model: Model<Cart>,
-    private readonly articleService: ArticleService,
-    private readonly cartService: CartService) {
+  constructor() {
   }
 
-  async createAsync(dto: StoreDto): Promise<any> {
+  create(dto: StoreDto): any {
 
-    const carts = dto.articles.map(art => {
-      return dto.carts.map(crt => {
-        const items = crt.items
-          .filter(it => it.article_id === art.id);
+    let deliverys: Delivery[] = null;
 
-        const price = art.price;
-        const total = items.reduce((total, item) => {
-          return total + (price * item.quantity);
-        }, 0);
-
-        return { id: crt.id, total: total };
+    if (dto.delivery_fees) {
+      deliverys = dto.delivery_fees.map(dl => {
+        return new Delivery(new Volume(dl.eligible_transaction_volume.min_price,
+          dl.eligible_transaction_volume.max_price), dl.price);
       });
+    }
+
+    const discounts = dto.discounts.map(d => {
+      return { article_id: d.article_id, type: d.type, value: d.value };
     });
 
-    return carts;
-
+    const store = new Store(dto.articles, dto.carts, deliverys, discounts);
+    return store.calculate();
   }
 }
