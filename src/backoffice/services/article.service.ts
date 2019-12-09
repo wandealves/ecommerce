@@ -16,6 +16,10 @@ export class ArticleService {
     return await cart.save();
   }
 
+  async createOrUpdate(key: number, data: Article): Promise<Article> {
+    return await this.model.findOneAndUpdate({ key }, data);
+  }
+
   async queryAsync(model: QueryDto): Promise<Article[]> {
     return await this.model.
       find(model.query, model.fields,
