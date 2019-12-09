@@ -5,7 +5,7 @@
 
 ## Description
 
-projeto utilizando o [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Projeto utilizando o [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository. Os testes realizados foram os leveis 1, 2 e 3. https://bitbucket.org/lixao/tech-interview/src/master/backend/
 
 ## Instalação
 
