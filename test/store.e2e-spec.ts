@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { AppModule } from '../src/app.module';
+import { StoreData } from './../src/data/store-data';
 
-describe('AppController (e2e)', () => {
+describe('StoreController (e2e)', () => {
   let app: INestApplication;
-
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
@@ -15,10 +15,17 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('api/stores (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .get('/api/stores')
       .expect(200)
       .expect('Hello World!');
+  });
+
+  it(`api/stores (POST)`, async () => {
+    return await request(app.getHttpServer())
+      .post('/api/stores')
+      .send(new StoreData().data())
+      .expect(200);
   });
 });

@@ -2,39 +2,18 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
-[travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
-[travis-url]: https://travis-ci.org/nestjs/nest
-[linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
-[linux-url]: https://travis-ci.org/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/dm/@nestjs/core.svg" alt="NPM Downloads" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://api.travis-ci.org/nestjs/nest.svg?branch=master" alt="Travis" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://img.shields.io/travis/nestjs/nest/master.svg?label=linux" alt="Linux" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#5" alt="Coverage" /></a>
-<a href="https://gitter.im/nestjs/nestjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge"><img src="https://badges.gitter.im/nestjs/nestjs.svg" alt="Gitter" /></a>
-<a href="https://opencollective.com/nest#backer"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
-  <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+projeto utilizando o [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Instalação
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Executar a app
 
 ```bash
 # development
@@ -47,28 +26,194 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Obter resultados
 
-```bash
-# unit tests
-$ npm run test
+Para obter as saídas dos testes chame a API, essa pode receber qualquer JSON dios teste e de acordo com a entreda realiza os calculos:
 
-# e2e tests
-$ npm run test:e2e
+- POTS [base_url]/api/stores
 
-# test coverage
-$ npm run test:cov
+Level 1
+
+Body:
+
+```json
+{
+  "articles": [
+    { "id": 1, "name": "water", "price": 100 },
+    { "id": 2, "name": "honey", "price": 200 },
+    { "id": 3, "name": "mango", "price": 400 },
+    { "id": 4, "name": "tea", "price": 1000 }
+  ],
+  "carts": [
+    {
+      "id": 1,
+      "items": [
+        { "article_id": 1, "quantity": 6 },
+        { "article_id": 2, "quantity": 2 },
+        { "article_id": 4, "quantity": 1 }
+      ]
+    },
+    {
+      "id": 2,
+      "items": [
+        { "article_id": 2, "quantity": 1 },
+        { "article_id": 3, "quantity": 3 }
+      ]
+    },
+    {
+      "id": 3,
+      "items": []
+    }
+  ]
+}
 ```
 
-## Support
+Level 2
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Body:
+
+```json
+{
+  "articles": [
+    { "id": 1, "name": "water", "price": 100 },
+    { "id": 2, "name": "honey", "price": 200 },
+    { "id": 3, "name": "mango", "price": 400 },
+    { "id": 4, "name": "tea", "price": 1000 }
+  ],
+  "carts": [
+    {
+      "id": 1,
+      "items": [
+        { "article_id": 1, "quantity": 6 },
+        { "article_id": 2, "quantity": 2 },
+        { "article_id": 4, "quantity": 1 }
+      ]
+    },
+    {
+      "id": 2,
+      "items": [
+        { "article_id": 2, "quantity": 1 },
+        { "article_id": 3, "quantity": 3 }
+      ]
+    },
+    {
+      "id": 3,
+      "items": []
+    }
+  ],
+  "delivery_fees": [
+    {
+      "eligible_transaction_volume": {
+        "min_price": 0,
+        "max_price": 1000
+      },
+      "price": 800
+    },
+    {
+      "eligible_transaction_volume": {
+        "min_price": 1000,
+        "max_price": 2000
+      },
+      "price": 400
+    },
+    {
+      "eligible_transaction_volume": {
+        "min_price": 2000,
+        "max_price": null
+      },
+      "price": 0
+    }
+  ]
+}
+```
+Level 3
+
+Body:
+
+```json
+{
+  "articles": [
+    { "id": 1, "name": "water", "price": 100 },
+    { "id": 2, "name": "honey", "price": 200 },
+    { "id": 3, "name": "mango", "price": 400 },
+    { "id": 4, "name": "tea", "price": 1000 },
+    { "id": 5, "name": "ketchup", "price": 999 },
+    { "id": 6, "name": "mayonnaise", "price": 999 },
+    { "id": 7, "name": "fries", "price": 378 },
+    { "id": 8, "name": "ham", "price": 147 }
+  ],
+  "carts": [
+    {
+      "id": 1,
+      "items": [
+        { "article_id": 1, "quantity": 6 },
+        { "article_id": 2, "quantity": 2 },
+        { "article_id": 4, "quantity": 1 }
+      ]
+    },
+    {
+      "id": 2,
+      "items": [
+        { "article_id": 2, "quantity": 1 },
+        { "article_id": 3, "quantity": 3 }
+      ]
+    },
+    {
+      "id": 3,
+      "items": [
+        { "article_id": 5, "quantity": 1 },
+        { "article_id": 6, "quantity": 1 }
+      ]
+    },
+    {
+      "id": 4,
+      "items": [
+        { "article_id": 7, "quantity": 1 }
+      ]
+    },
+    {
+      "id": 5,
+      "items": [
+        { "article_id": 8, "quantity": 3 }
+      ]
+    }
+  ],
+  "delivery_fees": [
+    {
+      "eligible_transaction_volume": {
+        "min_price": 0,
+        "max_price": 1000
+      },
+      "price": 800
+    },
+    {
+      "eligible_transaction_volume": {
+        "min_price": 1000,
+        "max_price": 2000
+      },
+      "price": 400
+    },
+    {
+      "eligible_transaction_volume": {
+        "min_price": 2000,
+        "max_price": null
+      },
+      "price": 0
+    }
+  ],
+  "discounts": [
+    { "article_id": 2, "type": "amount", "value": 25 },
+    { "article_id": 5, "type": "percentage", "value": 30 },
+    { "article_id": 6, "type": "percentage", "value": 30 },
+    { "article_id": 7, "type": "percentage", "value": 25 },
+    { "article_id": 8, "type": "percentage", "value": 10 }
+  ]
+}
+```
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Autor - [github](https://github.com/wandealves/)
 
 ## License
 

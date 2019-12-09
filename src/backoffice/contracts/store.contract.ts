@@ -1,19 +1,20 @@
 import { Injectable } from '@nestjs/common';
 
-import { Article } from '../models/article.model';
 import { IContract } from './contract';
 import { Flunt } from '../../utils/flunt';
 
 @Injectable()
-export class ArticleContract implements IContract {
+export class StoreContract implements IContract {
   errors: any[];
 
-  validate(model: Article): boolean {
+  validate(model: any): boolean {
     const flunt = new Flunt();
 
-    flunt.isRequired(model.name, 'Name is required');
+    flunt.isRequired(model.articles, 'Article is required');
+    flunt.isRequired(model.carts, 'Cart is required');
 
     this.errors = flunt.errors;
     return flunt.isValid();
+    return true;
   }
 }
