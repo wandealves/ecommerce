@@ -4,6 +4,7 @@ import { StoreDto } from '../dtos/store.dto';
 import { Store } from '../models/store';
 import { Delivery } from '../models/delivery';
 import { Volume } from '../models/volume';
+import { Discount } from '../models/discount';
 
 @Injectable()
 export class StoreService {
@@ -22,9 +23,13 @@ export class StoreService {
       });
     }
 
-    const discounts = dto.discounts.map(d => {
-      return { article_id: d.article_id, type: d.type, value: d.value };
-    });
+    let discounts: Discount[] = null;
+
+    if (dto.discounts) {
+      discounts = dto.discounts.map(d => {
+        return new Discount(d.article_id, d.type, d.value);
+      });
+    }
 
     const store = new Store(dto.articles, dto.carts, deliverys, discounts);
     return store.calculate();

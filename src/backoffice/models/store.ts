@@ -35,7 +35,7 @@ export class Store {
             return totalPrice += art.price;
           }, 0);
 
-        if (this.discounts) {
+        if (this.discounts && this.discounts.length > 0) {
           const discount = this.discounts.find(d => d.article_id === it.article_id);
 
           if (discount) {
@@ -54,7 +54,7 @@ export class Store {
       }, 0);
 
       return {
-        id: ct.id, quantity, total
+        id: ct.id, total
       };
     });
 
