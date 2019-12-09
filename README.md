@@ -28,7 +28,7 @@ $ npm run start:prod
 
 ## Obter resultados
 
-Para obter as saídas dos testes chame a API, essa pode receber qualquer JSON dios teste e de acordo com a entreda realiza os calculos:
+Para obter as saídas dos testes chame a API /api/stores, essa pode receber qualquer JSON dos teste(level 01, 02 e 03) e de acordo com a entrada retorna a saída correspondente.
 
 - POTS [base_url]/api/stores
 
